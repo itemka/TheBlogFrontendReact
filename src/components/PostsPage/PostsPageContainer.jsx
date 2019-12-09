@@ -1,10 +1,10 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {getPostByIdThunk, GetPostsThunk} from "../../Redux/Reducer";
+import {CreatePostThunk, getPostByIdThunk, GetPostsThunk} from "../../Redux/Reducer";
 import {PostsPage} from "./PostsPage";
 
 class PostsPageContainer extends React.Component {
-    componentWillMount() {
+    componentDidMount() {
         this.props.GetPostsThunk();
     }
 
@@ -13,9 +13,12 @@ class PostsPageContainer extends React.Component {
     render() {
         return (
             <PostsPage addPost={this.getPosts}
-                       getPostById={this.props.getPostByIdThunk}/>
+                       getPostById={this.props.getPostByIdThunk}
+                       createPost={this.props.CreatePostThunk}/>
         )
     }
 }
 
-export default connect(null, {GetPostsThunk, getPostByIdThunk})(PostsPageContainer);
+export default connect(
+    null, {GetPostsThunk, getPostByIdThunk, CreatePostThunk}
+)(PostsPageContainer);

@@ -6,7 +6,7 @@ import cssOther from "./PostAdd/PostAdd.module.css";
 import {PostUpdate} from "./PostUpdate/PostUpdate";
 import {SearchById} from "./SearchById/SearchById";
 
-export const PostsPage = ({addPost, getPostById, isPostUpdate = true}) => {
+export const PostsPage = ({addPost, getPostById, createPost, isPostUpdate = false}) => {
     return (
         <div className={css.PostsPage}>
 
@@ -15,7 +15,7 @@ export const PostsPage = ({addPost, getPostById, isPostUpdate = true}) => {
                         className={`${cssOther.button} ${css.showPostsButton}`}>
                     All posts
                 </button>
-                {isPostUpdate ? <PostUpdate/> : <PostAdd/>}
+                {isPostUpdate ? <PostUpdate/> : <PostAdd createPost={createPost}/>}
                 <SearchById getPostById={getPostById}/>
             </div>
 
