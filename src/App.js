@@ -1,11 +1,9 @@
 import React from 'react';
 import './App.css';
+import TheBlogContainer from "./components/TheBlog/TheBlogContainer";
 
 const App = () => {
-    return (
-        <div>
-        </div>
-    )
+    return <TheBlogContainer/>
 };
 
 export default App;
