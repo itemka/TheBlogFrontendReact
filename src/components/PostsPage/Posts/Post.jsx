@@ -4,8 +4,8 @@ import css from './Posts.module.css';
 export const Post = ({postId, title, text}) => {
     return (
         <div className={css.Post}>
-            <div className={css.delete}>
-                <span>Edit</span><span>X</span>
+            <div className={css.changeButton}>
+                <span className={`${css.button} ${css.postEdit}`}>Edit</span><span className={`${css.button} ${css.delete}`}>X</span>
             </div>
             <div>{`userId: ${postId}`}</div>
             <div className={css.postTitle}>{`Title: ${title}`}</div>

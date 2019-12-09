@@ -1,14 +1,13 @@
 import axios from 'axios';
 
 const instance = axios.create({
-    baseURL: `http://localhost:3000/`,
-    withCredentials: true,
+    baseURL: `http://localhost:333/`,
 });
 
 export const PostAPI = {
-    getPosts: () => instance.get(`posts`),
-    getPost: (postId) => instance.get(`posts/${postId}`),
-    createPost: (postBody) => instance.post(`posts`, postBody),
-    deletePost: (postId) => instance.delete(`posts/${postId}`),
-    updatePost: (postId) => instance.put(`posts/${postId}`)
+    getPosts: () => instance.get('posts').then(response => response.data),
+    getPostById: postId => instance.get(`posts/${postId}`).then(response => response.data),
+    createPost: postBody => instance.post(`posts`, postBody),
+    deletePost: postId => instance.delete(`posts/${postId}`),
+    updatePost: postId => instance.put(`posts/${postId}`)
 };
