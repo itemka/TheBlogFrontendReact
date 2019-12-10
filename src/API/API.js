@@ -9,5 +9,5 @@ export const PostAPI = {
     getPostById: postId => instance.get(`posts/${postId}`).then(response => response.data),
     createPost: postBody => instance.post(`posts`, postBody),
     deletePost: postId => instance.delete(`posts/${postId}`),
-    updatePost: postId => instance.put(`posts/${postId}`)
+    updatePost: (postId, postBody) => instance.put(`posts/${postId}`, postBody)
 };

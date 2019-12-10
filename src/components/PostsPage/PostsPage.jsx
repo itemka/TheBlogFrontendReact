@@ -1,12 +1,18 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PostsContainer from "./Posts/PostsContainer";
 import {PostAdd} from "./PostAdd/PostAdd";
 import css from "./PostsPage.module.css";
 import cssOther from "./PostAdd/PostAdd.module.css";
-import {PostUpdate} from "./PostUpdate/PostUpdate";
 import {SearchById} from "./SearchById/SearchById";
+import PostUpdate from "./PostUpdate/PostUpdate";
 
-export const PostsPage = ({addPost, getPostById, createPost, isPostUpdate = false}) => {
+export const PostsPage = ({addPost, getPostById, createPost}) => {
+    let [isPostUpdate, setIsPostUpdate] = useState(false);
+    let [updatePostID, setUpdatePost] = useState('');
+    let SetIsPostUpdate = postId => {
+        setIsPostUpdate(!isPostUpdate);
+        setUpdatePost(postId);
+    };
     return (
         <div className={css.PostsPage}>
 
@@ -15,11 +21,11 @@ export const PostsPage = ({addPost, getPostById, createPost, isPostUpdate = fals
                         className={`${cssOther.button} ${css.showPostsButton}`}>
                     All posts
                 </button>
-                {isPostUpdate ? <PostUpdate/> : <PostAdd createPost={createPost}/>}
+                {isPostUpdate ? <PostUpdate updatePostID={updatePostID}/> : <PostAdd createPost={createPost}/>}
                 <SearchById getPostById={getPostById}/>
             </div>
 
-            <PostsContainer/>
+            <PostsContainer SetIsPostUpdate={SetIsPostUpdate}/>
         </div>
     )
 };

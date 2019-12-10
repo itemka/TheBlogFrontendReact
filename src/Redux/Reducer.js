@@ -10,6 +10,7 @@ const getPostsAC = posts => ({type: GET_POSTS, posts});
 const getPostByIdAC = post => ({type: GET_POST_BY_ID, post});
 // const createPostAC = postBody => ({type: CREATE_POST, postBody});
 const deletePostAC = postId => ({type: DELETE_POST, postId});
+const updatePostAC = (postId, updatePost) => ({type: UPDATE_POST, postId, updatePost});
 
 export const GetPostsThunk = () => async dispatch => {
     try {
@@ -44,6 +45,15 @@ export const DeletePostThunk = postId => async dispatch => {
         console.log(`Error:`, err)
     }
 };
+export const UpdatePostThunk = (postId, title = '', text = '') => async dispatch => {
+    try {
+        let data = {title: title, text: text};
+        await PostAPI.updatePost(postId, data);
+        dispatch(updatePostAC(postId, data));
+    } catch (err) {
+        console.log(`Error:`, err)
+    }
+};
 
 let initialState = {
     posts: [],
@@ -67,6 +77,15 @@ const PostReducer = (state = initialState, action) => {
             return {
                 ...state,
                 posts: state.posts.filter(item => item._id !== action.postId)
+            };
+        case UPDATE_POST:
+            return {
+                ...state,
+                posts: state.posts.map(item => {
+                    if (item._id === action.postId) {
+                        return {...action.updatePost, _id: item._id}
+                    } else return item;
+                })
             };
         default:
             return state;

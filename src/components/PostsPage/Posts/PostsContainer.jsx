@@ -8,6 +8,7 @@ class PostsContainer extends React.Component {
     render() {
         let posts = this.props.posts.map(item => <Post key={item._id}
                                                        deletePost={this.props.DeletePostThunk}
+                                                       SetIsPostUpdate={this.props.SetIsPostUpdate}
                                                        postId={item._id}
                                                        title={item.title}
                                                        text={item.text}/>);
